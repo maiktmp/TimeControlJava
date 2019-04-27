@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">controlTime</string>
+    <string name="login">Login</string>
+    <string name="title_activity_act_profile">act_profile</string>
+    <string name="user">Usuario</string>
+    <string name="password">Contraseña</string>
+    <string name="log_in">Iniciar sesión</string>
+    <string name="groups">Grupos</string>
+    <string name="label_name">Nombre:</string>
+    <string name="label_email">Correo:</string>
+    <string name="current_group">Grupo actual</string>
+    <string name="day_group">Grupos del día</string>
+</resources>
