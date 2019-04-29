@@ -10,4 +10,5 @@
     <string name="label_email">Correo:</string>
     <string name="current_group">Grupo actual</string>
     <string name="day_group">Grupos del día</string>
+    <string name="check_assist">Capturar asistencia</string>
 </resources>

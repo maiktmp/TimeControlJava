@@ -43,8 +43,8 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         Group group = groups.get(position);
 
         holder.tvGroup.setText(group.getName());
-        holder.tvStart.setText(group.getStartHour());
-        holder.tvEnd.setText(group.getEndHour());
+//        holder.tvStart.setText(group.getStartHour());
+//        holder.tvEnd.setText(group.getEndHour());
         if (onGroupCLickLIstener != null) {
             holder.itemRoot.setOnClickListener(
                     view -> onGroupCLickLIstener.onGroupCLickLIstener(group)

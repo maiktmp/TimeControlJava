@@ -12,4 +12,7 @@ public interface TimeInterface {
     @GET(APIConstants.wsPath + "user/{userId}/groups")
     Call<List<Group>> getUserGroups(@Path("userId") long userId);
 
+    @GET(APIConstants.wsPath + "user/{userId}/groups/current")
+    Call<Group> getCurrentGroup(@Path("userId") long userId);
+
 }

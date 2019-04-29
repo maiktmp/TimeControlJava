@@ -1,6 +1,7 @@
 package com.example.maiknight.timecontroljava.Database;
 
 import com.example.maiknight.timecontroljava.Database.converters.DBTypeConverters;
+import com.example.maiknight.timecontroljava.Database.converters.LocalTimeConverter;
 import com.example.maiknight.timecontroljava.Database.daos.GroupDao;
 import com.example.maiknight.timecontroljava.Database.daos.UserDao;
 import com.example.maiknight.timecontroljava.Database.entities.Group;
@@ -16,13 +17,19 @@ import androidx.room.TypeConverters;
                 User.class,
                 Group.class,
                 UserHasGroup.class,
-        }, version = 2,
+        }, version = 4,
         exportSchema = false
 )
-@TypeConverters({DBTypeConverters.class})
+@TypeConverters(
+        {
+                DBTypeConverters.class,
+                LocalTimeConverter.class
+        }
+)
 public abstract class DBTime extends RoomDatabase {
-        public static DBTime db;
+    public static DBTime db;
 
-        public abstract UserDao userDao();
-        public abstract GroupDao groupDao();
+    public abstract UserDao userDao();
+
+    public abstract GroupDao groupDao();
 }

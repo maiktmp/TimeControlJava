@@ -76,6 +76,14 @@ public class ApiTime {
         );
     }
 
+    public void getCurrentGroup(long userId, CBSuccess<Group> cb) {
+        request(
+                "Get current group",
+                apiService.getCurrentGroup(userId),
+                cb
+        );
+    }
+
     @SuppressWarnings("unchecked")
     private void request(final String operation, Call call, final CBSuccess cb) {
         call.enqueue(new Callback() {

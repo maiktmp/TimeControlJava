@@ -1,12 +1,12 @@
 package com.example.maiknight.timecontroljava.Database.entities;
 
-import com.google.gson.annotations.SerializedName;
-
-import java.util.Date;
-
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+
+import com.google.gson.annotations.SerializedName;
+
+import java.time.LocalTime;
 
 @Entity
 public class Group {

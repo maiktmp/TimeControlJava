@@ -45,4 +45,16 @@ public class Interactor {
         });
     }
 
+    public void getCurrentGroup(long userId, CBGeneric<Group> cb) {
+        api.getCurrentGroup(userId, (success, group) -> {
+            if (!success) {
+                cb.onResult(null);
+            }
+            RxInstructions.completable(() -> {
+                        groupDao.upsert(group);
+                    },
+                    () -> cb.onResult(group));
+        });
+    }
+
 }
