@@ -4,6 +4,10 @@ import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 
+import com.example.maiknight.timecontroljava.utils.callbacks.CBDone;
+import com.example.maiknight.timecontroljava.utils.callbacks.CBGeneric;
+import com.example.maiknight.timecontroljava.utils.callbacks.CBSuccess;
+
 import java.io.IOException;
 import java.util.UUID;
 
@@ -31,7 +35,7 @@ class AcceptThread extends Thread {
         mmSocket = tmp;
     }
 
-    public void run() {
+    public void run(CBDone cb, CBGeneric<String> cb2) {
         // Cancel discovery because it will slow down the connection
         mBluetoothAdapter.cancelDiscovery();
 
@@ -50,10 +54,11 @@ class AcceptThread extends Thread {
 
         // Do work to manage the connection (in a separate thread)
         ConnectedThread connectedThread = new ConnectedThread(mmSocket);
-        String op = "1";
-        byte[] msgBuffer = op.getBytes();
-        connectedThread.write(msgBuffer);
-        connectedThread.run();
+//        String op = "1";
+//        byte[] msgBuffer = op.getBytes();
+//        connectedThread.write(msgBuffer);
+        cb.done();
+        connectedThread.run(cb2);
     }
 
     /**

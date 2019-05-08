@@ -3,6 +3,8 @@ package com.example.maiknight.timecontroljava.ui.check;
 import android.bluetooth.BluetoothSocket;
 import android.util.Log;
 
+import com.example.maiknight.timecontroljava.utils.callbacks.CBGeneric;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -29,7 +31,7 @@ class ConnectedThread extends Thread {
         mmOutStream = tmpOut;
     }
 
-    public void run() {
+    void run(CBGeneric<String> cb) {
         byte[] buffer = new byte[1024];  // buffer store for the stream
         int bytes; // bytes returned from read()
 
@@ -39,7 +41,7 @@ class ConnectedThread extends Thread {
                 // Read from the InputStream
                 bytes = mmInStream.read(buffer);
                 String readMessage = new String(buffer, 0, bytes);
-                Log.e("ARDUINO", readMessage);
+                cb.onResult(readMessage);
                 // Send the obtained bytes to the UI activity
             } catch (IOException e) {
                 break;
