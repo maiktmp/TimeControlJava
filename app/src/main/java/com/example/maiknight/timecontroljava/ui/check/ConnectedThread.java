@@ -1,23 +1,31 @@
 package com.example.maiknight.timecontroljava.ui.check;
 
 import android.bluetooth.BluetoothSocket;
+import android.os.Message;
 import android.util.Log;
 
+import com.example.maiknight.timecontroljava.api.Codes;
 import com.example.maiknight.timecontroljava.utils.callbacks.CBGeneric;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import android.os.Handler;
+
+
 class ConnectedThread extends Thread {
     private final BluetoothSocket mmSocket;
     private final InputStream mmInStream;
     private final OutputStream mmOutStream;
+    private final Handler mHandler;
 
-    ConnectedThread(BluetoothSocket socket) {
+    ConnectedThread(BluetoothSocket socket, Handler handler) {
+
         mmSocket = socket;
         InputStream tmpIn = null;
         OutputStream tmpOut = null;
+        mHandler = handler;
 
         // Get the input and output streams, using temp objects because
         // member streams are final
@@ -31,17 +39,22 @@ class ConnectedThread extends Thread {
         mmOutStream = tmpOut;
     }
 
-    void run(CBGeneric<String> cb) {
+    public void run() {
         byte[] buffer = new byte[1024];  // buffer store for the stream
         int bytes; // bytes returned from read()
 
         // Keep listening to the InputStream until an exception occurs
+
         while (true) {
             try {
                 // Read from the InputStream
                 bytes = mmInStream.read(buffer);
                 String readMessage = new String(buffer, 0, bytes);
-                cb.onResult(readMessage);
+                Log.e("ARDUINO", readMessage);
+                Message message = new Message();
+                message.what = Codes.TRASNFER_DATA;
+                message.obj=readMessage;
+                mHandler.sendMessage(message);
                 // Send the obtained bytes to the UI activity
             } catch (IOException e) {
                 break;
